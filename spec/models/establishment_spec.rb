@@ -1,34 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Establishment, type: :model do
+  before(:each) do
+    @establishment = build(:establishment)
+  end
   describe Establishment do
     it "is valid with a name, adress, kind, telephone and delivery status" do
-        establishment = build(:establishment)
-        expect(establishment).to be_valid
+        expect(@establishment).to be_valid
     end
     it "is invalid without a name" do
-        establishment = build(:establishment)
-        establishment.name = nil
-        establishment.valid?
-        expect(establishment.errors[:name]).to include("can't be blank")
+        @establishment.name = nil
+        @establishment.valid?
+        expect(@establishment.errors[:name]).to include("can't be blank")
     end
     it "is invalid without a adress" do
-        establishment = build(:establishment)
-        establishment.adress = nil
-        establishment.valid?
-        expect(establishment.errors[:adress]).to include("can't be blank")
+        @establishment.adress = nil
+        @establishment.valid?
+        expect(@establishment.errors[:adress]).to include("can't be blank")
     end
     it "is invalid without a telephone" do
-        establishment = build(:establishment)
-        establishment.telephone = nil
-        establishment.valid?
-        expect(establishment.errors[:telephone]).to include("can't be blank")
+        @establishment.telephone = nil
+        @establishment.valid?
+        expect(@establishment.errors[:telephone]).to include("can't be blank")
     end
     it "is invalid without a delivery status" do
-         establishment = build(:establishment)
-         establishment.delivery = nil
-         establishment.valid?
-         expect(establishment.errors[:delivery]).to include("is not included in the list")
+         @establishment.delivery = nil
+         @establishment.valid?
+         expect(@establishment.errors[:delivery]).to include("is not included in the list")
     end
     it "is invalid with a duplicate name and adress" do
         Establishment.create(
@@ -50,6 +48,9 @@ RSpec.describe Establishment, type: :model do
         establishment.valid?
         expect(establishment.errors[:name]).to include("has already been taken")
     end
-    it "returns the establishment infos"
+    it "can have many products" do
+        reflection = Establishment.reflect_on_association(:products).macro
+        expect(reflection).to eq :has_many
+    end
   end
 end

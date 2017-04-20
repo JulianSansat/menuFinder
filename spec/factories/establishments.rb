@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :establishment do
-    name "MyString"
+    name {('a'..'z').to_a.shuffle.join}
     adress "MyString"
     kind "MyString"
     telephone "MyString"
