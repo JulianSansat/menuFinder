@@ -5,6 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times do |d|
+    Establishment.create!(
+        name: "Estabelecimento #{d}",
+        adress: "rua numero blablabla",
+        kind: "tipo x",
+        telephone: "(84)23232323",
+        delivery: false,
+        description: "um estabelecimento bla bla bla bla bla bla bla bla bla bla bla"
+    )
+end
+
 10.times do |j|
     10.times do |n|
         Product.create(
@@ -13,7 +24,7 @@
             description: "descrição do produto #{n}" ,
             price: "9,90",
             image: "http://www.upah.com.br/media/catalog/product/cache/1/thumbnail/800x/17f82f742ffe127f42dca9de82fb58b1/p/a/papel-para-lanche-hamburguer.jpg",
-            establishment_id: j
+            establishment: j
         )
     end
 end
