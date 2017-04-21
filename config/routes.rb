@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :products
+  resources :establishment
+
+  get 'establishment/list_products'
+
   get 'restaurants/index'
 
   mount_devise_token_auth_for 'User', at: 'auth'
